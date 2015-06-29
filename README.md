@@ -1,6 +1,10 @@
 Integration with react and react-router
 ---------------------------------------
 
+# packages we used
+
+Bootstrap, bower, gulp, sass
+
 # How to install
 
 please checkout it and run command below, if you are install nodejs and npm
