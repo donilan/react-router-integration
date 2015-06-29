@@ -50,7 +50,7 @@ gulp.task('css', function() {
       config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
       config.bowerDir + '/fontawesome/scss',
     ]}).on("error", handleErrors
-    ).pipe($.dest('./www/'));
+    ).pipe(gulp.dest('./www/'));
 });
 
 gulp.task('js', function(){
