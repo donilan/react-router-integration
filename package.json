@@ -26,12 +26,15 @@
     "browserify": "^10.2.4",
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
-    "gulp-flatten": "0.0.4",
+    "gulp-if": "^1.2.5",
+    "gulp-load-plugins": "^0.10.0",
     "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^1.0.5",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "run-sequence": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^3.14.0"
   }
 }
