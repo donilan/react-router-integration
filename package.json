@@ -16,20 +16,22 @@
   "author": "Doni",
   "license": "MIT",
   "dependencies": {
-    "ratchet": "git://github.com/twbs/ratchet",
     "react": "^0.13.3",
     "react-router": "^0.13.3"
   },
   "devDependencies": {
     "babelify": "^6.1.2",
+    "bower": "^1.4.1",
     "browser-sync": "^2.7.12",
+    "browserify": "^10.2.4",
     "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
+    "gulp-bower": "0.0.10",
     "gulp-flatten": "0.0.4",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.0.2",
+    "gulp-ruby-sass": "^1.0.5",
     "gulp-util": "^3.0.6",
-    "run-sequence": "^1.1.1"
+    "run-sequence": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
