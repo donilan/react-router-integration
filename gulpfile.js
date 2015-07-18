@@ -8,26 +8,34 @@ var source      = require('vinyl-source-stream');
 var $           = require('gulp-load-plugins')({
   rename: {
     'gulp-ruby-sass': 'sass',
-    'gulp-minify-css': 'minifyCss'
+    'gulp-minify-css': 'minifyCss',
+    'gulp-jest-iojs': 'jest'
   }});
 
 
 var config = {
   sassPath: './src/sass/',
   bowerDir: './bower_components',
-  dest: './www'
+  dest: './www',
+  jsEntries: './src/js/main.js'
 };
+config['fontsPath'] = config.bowerDir + '/fontawesome/fonts/**.*';
+config['stylePaths'] = [
+  config.sassPath,
+  config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
+  config.bowerDir + '/fontawesome/scss',
+];
 
-function handleErrors() {
+
+function handleErrors(arg1) {
 
   var args = Array.prototype.slice.call(arguments);
-
   // Send error to notification center with gulp-notify
   $.notify.onError({
     title: "Compile Error",
     message: "<%= error.message %>"
   }).apply(this, args);
-
+  console.log(arg1.codeFrame);
   // Keep gulp from hanging on this task
   this.emit('end');
 };
@@ -38,30 +46,25 @@ gulp.task('bower', function() {
 });
 
 gulp.task('icons', function() {
-  return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*')
+  return gulp.src(config.fontsPath)
              .pipe(gulp.dest('./www/fonts'));
 });
 
 gulp.task('css', function() {
   return $.sass(config.sassPath + '/app.scss',{
     style: 'compressed',
-    loadPath: [
-      config.sassPath,
-      config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
-      config.bowerDir + '/fontawesome/scss',
-    ]}).on("error", handleErrors
+    loadPath: config.stylePaths}).on("error", handleErrors
     ).pipe(gulp.dest('./www/'));
 });
 
 gulp.task('js', function(){
   return browserify({
-    entries: 'src/js/main.jsx',
-    extensions: ['.jsx'],
+    entries: config.jsEntries,
     debug: true
   }).transform(babelify
   ).bundle(
-  ).pipe(source('app.js')
   ).on('error', handleErrors
+  ).pipe(source('app.js')
   ).pipe($.if(args.production, $.streamify($.uglify()))
   ).pipe(gulp.dest('./www'));
 });

@@ -6,12 +6,9 @@ var DefaultRoute = Router.DefaultRoute;
 var App = require('./app');
 var Dashboard = require('./pages/dashboard');
 
-var Settings = require('./pages/settings');
-
 var routes = (
   <Route name="app" handler={App} path="/" >
     <DefaultRoute name="dashboard" handler={Dashboard} />
-    <Route name="settings" handler={Settings} />
   </Route>
 );
 
