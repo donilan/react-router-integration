@@ -1,10 +1,9 @@
 var args        = require('yargs').argv;
 var gulp        = require('gulp');
 var runSequence = require('run-sequence');
-var browserify  = require('browserify');
-var babelify    = require("babelify");
-var browserSync = require('browser-sync');
-var source      = require('vinyl-source-stream');
+var webpackConfig = require('./webpack.config');
+var webpack = require("webpack");
+var WebpackDevServer = require("webpack-dev-server");
 var $           = require('gulp-load-plugins')({
   rename: {
     'gulp-ruby-sass': 'sass',
@@ -57,18 +56,6 @@ gulp.task('css', function() {
     ).pipe(gulp.dest('./www/'));
 });
 
-gulp.task('js', function(){
-  return browserify({
-    entries: config.jsEntries,
-    debug: true
-  }).transform(babelify
-  ).bundle(
-  ).on('error', handleErrors
-  ).pipe(source('app.js')
-  ).pipe($.if(args.production, $.streamify($.uglify()))
-  ).pipe(gulp.dest('./www'));
-});
-
 gulp.task('images', function() {
   return gulp.src('./src/img/**')
     .pipe(gulp.dest('./www/img'));
@@ -80,32 +67,40 @@ gulp.task('html', function() {
 });
 
 
-gulp.task('build', ['html', 'bower', 'icons', 'css', 'js']);
+gulp.task('build', ['html', 'bower', 'icons', 'css', 'webpack:build']);
 
+gulp.task("webpack:build", function(callback) {
 
-gulp.task('serve', function(cb) {
-  var url = require('url');
-  var fs = require('fs');
-  watch = true;
-
-  runSequence('build', function() {
-    browserSync({
-      notify: false,
-      // Customize the BrowserSync console logging prefix
-      logPrefix: 'RSK',
-      server: {
-        baseDir: config.dest
-      }
-    });
-    gulp.watch('./src/js/**', ['js'])
-    gulp.watch('./src/img/**', ['images']);
-    gulp.watch('./src/sass/**', ['css']);
-    gulp.watch('./src/index.html', ['html']);
-    gulp.watch(config.dest + '/**/*.*', function(file) {
-      browserSync.reload();
-    });
-    cb();
+  webpack(require('./webpack.production.config'), function(err, stats) {
+    if(err) throw new $.util.PluginError("webpack:build", err);
+    $.util.log("[webpack:build]", stats.toString({
+      colors: true
+    }));
+    callback();
   });
 });
 
-gulp.task('default', ['serve']);
+gulp.task("webpack:dev:server", ['html', 'bower', 'icons', 'css'], function(callback) {
+
+  var compiler = webpack(webpackConfig);
+
+  new WebpackDevServer(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    contentBase: './www',
+    hot: true,
+    historyApiFallback: true,
+    stats: {
+      colors: true
+    }
+
+  }).listen(3000, "localhost", function(err) {
+    if(err) throw new gutil.PluginError("webpack-dev-server", err);
+    $.util.log("[webpack-dev-server]", "http://localhost:3000/webpack-dev-server/index.html");
+
+    gulp.watch('./src/sass/**', ['css']);
+
+    callback();
+  });
+});
+
+gulp.task('default', ["webpack:dev:server"]);

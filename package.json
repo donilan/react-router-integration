@@ -22,13 +22,17 @@
     "react-router": "^0.13.3",
     "react-router-bootstrap": "^0.17.1",
     "react-tools": "^0.13.3",
+    "redux": "^0.12.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "babelify": "^6.1.2",
+    "babel-core": "^5.5.8",
+    "babel-loader": "^5.1.4",
+    "node-libs-browser": "^0.5.2",
+    "react-hot-loader": "^1.2.7",
+    "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.9.0",
     "bower": "^1.4.1",
-    "browser-sync": "^2.7.12",
-    "browserify": "^10.2.4",
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
     "gulp-if": "^1.2.5",
@@ -40,7 +44,6 @@
     "gulp-util": "^3.0.6",
     "jest-cli": "^0.4.14",
     "run-sequence": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.14.0"
   },
   "scripts": {
