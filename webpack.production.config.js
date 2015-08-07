@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './src/js/main'
+    './src/js'
   ],
   output: {
     path: path.join(__dirname, 'www'),
@@ -11,7 +11,7 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-        new webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       "process.env": {
         // This has effect on the react lib size
         "NODE_ENV": JSON.stringify("production")
@@ -24,9 +24,8 @@ module.exports = {
     extensions: ['', '.js']
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel']
-    }]
+    loaders: [
+      {test: /\.js$/, loaders: ['babel']}
+    ]
   }
 };
