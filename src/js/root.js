@@ -1,17 +1,17 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Redirect, Router, Route } from 'react-router'
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import * as reducers from './reducers';
-import * as containers from './containers'
+import * as stores from './stores';
+import * as components from './components'
 
 
-const reducer = combineReducers(reducers);
+const reducer = combineReducers(stores);
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-export default class Root extends Component {
+export default class Root extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   }
@@ -29,9 +29,9 @@ export default class Root extends Component {
 function renderRoutes(history) {
   return (
     <Router history={history}>
-      <Route component={containers.GithubUser} path='/'>
-        <Route component={containers.GithubRepo} path='/repo'>
-        </Route>
+      <Route component={components.pages.GithubIndex} path='/github'>
+        <Route component={components.pages.GithubRepo} path='/:username/:repo' />
+        <Route component={components.pages.GithubUser} path='/:username' />
       </Route>
     </Router>
   )
