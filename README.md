@@ -3,7 +3,7 @@ Integration with react and react-router
 
 # packages we used
 
-Bootstrap, bower, gulp, sass
+Bootstrap, bower, gulp, sass, webpack, redux, react
 
 # How to install
 
