@@ -18,7 +18,10 @@ module.exports = {
       }
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      __DEV__: false
+    })
   ],
   resolve: {
     extensions: ['', '.js']
