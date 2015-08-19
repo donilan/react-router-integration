@@ -2,9 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'sourcemap',
+  cache: true,
+  debug: true,
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './src/js/main'
   ],
@@ -12,6 +13,10 @@ module.exports = {
     path: path.join(__dirname, 'www'),
     filename: 'app.js',
     publicPath: '/'
+  },
+  stats: {
+    colors: true,
+    reasons: true
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -30,8 +35,17 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      exclude: /node_modules/
+      exclude: /node_modules/,
+      loader: 'react-hot!babel-loader'
+    }, {
+      test: /\.scss/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader'
+    }, {
+      test: /\.(png|jpg|woff|woff2|eot|ttf|svg).*$/,
+      loader: 'url-loader?limit=8192'
     }]
   }
 };

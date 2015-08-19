@@ -13,6 +13,8 @@
   "author": "Doni",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^3.3.5",
+    "font-awesome": "^4.4.0",
     "flux": "^2.0.3",
     "jquery": "^2.1.4",
     "keymirror": "^0.1.1",
@@ -22,49 +24,21 @@
     "react-router": "^0.13.3",
     "react-router-bootstrap": "^0.17.1",
     "react-tools": "^0.13.3",
-    "redux": "^0.12.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
     "babel-loader": "^5.1.4",
+    "css-loader": "~0.9.0",
+    "gulp": "^3.9.0",
+    "gulp-open": "^1.0.0",
+    "gulp-util": "^3.0.6",
     "node-libs-browser": "^0.5.2",
+    "sass-loader": "^1.0.1",
+    "style-loader": "~0.8.0",
+    "url-loader": "~0.5.5",
     "react-hot-loader": "^1.2.7",
     "webpack": "^1.9.11",
-    "webpack-dev-server": "^1.9.0",
-    "bower": "^1.4.1",
-    "gulp": "^3.9.0",
-    "gulp-bower": "0.0.10",
-    "gulp-if": "^1.2.5",
-    "gulp-load-plugins": "^0.10.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-ruby-sass": "^1.0.5",
-    "gulp-streamify": "0.0.5",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6",
-    "jest-cli": "^0.4.14",
-    "run-sequence": "^1.1.1",
-    "yargs": "^3.14.0"
-  },
-  "scripts": {
-    "test": "jest --coverage"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/preprocessor",
-    "testFileExtensions": [
-      "es6",
-      "js"
-    ],
-    "testPathIgnorePatterns": [
-      "node_modules"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
-    ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
-    ]
+    "webpack-dev-server": "^1.9.0"
   }
 }

@@ -1,7 +1,9 @@
 var React = require("react");
-var Router = require('react-router');
-var Layout = require('./layouts/default')
-var RouteHandler = Router.RouteHandler;
+var {RouteHandler} = require('react-router');
+var Layout = require('./layouts/default');
+require('../../node_modules/bootstrap/dist/css/bootstrap.css');
+require('../../node_modules/font-awesome/css/font-awesome.css');
+require('../sass/app.scss');
 
 var App = React.createClass({
 
